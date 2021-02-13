@@ -10,23 +10,25 @@ function ContextProvider(props) {
 
   const [ heading, setHeading ] = useState('Top 10 Tracks');
   
+  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
-    
-    axios.get(`https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=5&country=it&f_has_lyrics=1&apikey=a9fb099bf0129f268bf60971925593cf`)
+    try {
+      axios.get(`https://api.musixmatch.com/ws/1.1/chart.tracks.get?chart_name=top&page=1&page_size=10&country=ua&f_has_lyrics=1&apikey=a9fb099bf0129f268bf60971925593cf`)
     .then(res =>  {
       setTrackList(res.data.message.body.track_list)
-    })
-    .catch(err => console.log(err))
-
-    
+    });
+    setLoading(true)
+    } catch (err) {
+      console.log(err)
+    }
   },[])
   
   
 
   return (
    
-    <Context.Provider value={{ trackList, heading }}>
+    <Context.Provider value={{ trackList, heading, loading }}>
       {props.children}
     </Context.Provider>
   )
