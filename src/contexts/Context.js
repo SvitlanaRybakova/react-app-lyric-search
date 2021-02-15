@@ -10,7 +10,6 @@ function ContextProvider(props) {
 
   const [ heading, setHeading ] = useState('Top 10 Tracks');
   
-  const [loading, setLoading] = useState(false);
   
   useEffect(() => {
     try {
@@ -18,7 +17,7 @@ function ContextProvider(props) {
     .then(res =>  {
       setTrackList(res.data.message.body.track_list)
     });
-    setLoading(true)
+
     } catch (err) {
       console.log(err)
     }
@@ -27,8 +26,8 @@ function ContextProvider(props) {
   
 
   return (
-   
-    <Context.Provider value={{ trackList, heading, loading }}>
+
+    <Context.Provider value={{ trackList, heading }}>
       {props.children}
     </Context.Provider>
   )
