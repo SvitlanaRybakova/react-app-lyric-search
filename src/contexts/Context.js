@@ -10,6 +10,7 @@ function ContextProvider(props) {
 
   const [ heading, setHeading ] = useState('Top 10 Tracks');
   
+ 
   
   useEffect(() => {
     try {
@@ -27,7 +28,7 @@ function ContextProvider(props) {
 
   return (
 
-    <Context.Provider value={{ trackList, heading }}>
+    <Context.Provider value={{ trackList,  setTrackList, heading }}>
       {props.children}
     </Context.Provider>
   )
